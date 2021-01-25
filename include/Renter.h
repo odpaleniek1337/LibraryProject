@@ -11,7 +11,7 @@ private:
     int currentItems;
 public:
     Renter();
-    Renter(int id, const string &name, int maxItems, int currentItems);
+    Renter(int id, string name, int maxItems, int currentItems);
 
     int getCurrentItems();
 };
