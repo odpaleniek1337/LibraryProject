@@ -8,7 +8,8 @@ private:
 Item item;
 Renter renter;
 public:
-    Rent(Item item, Renter renter);
+    void setRent(Item item, Renter renter);
+    Rent();
     ~Rent();
 };
 #endif //LIBRARY_RENT_H

@@ -12,6 +12,7 @@ private:
     int quantity;
     void setBorrowedTime();
 public:
+    Item();
     Item(int id, string title, int maxDays, int quantity);
     int getID();
     string getBorrowedTime();

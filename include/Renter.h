@@ -10,6 +10,7 @@ private:
     int maxItems;
     int currentItems;
 public:
+    Renter();
     Renter(int id, const string &name, int maxItems, int currentItems);
 
     int getCurrentItems();
