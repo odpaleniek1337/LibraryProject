@@ -1,6 +1,6 @@
 #include "Other.h"
 
-Other::Other(int id, const string &name)
+Other::Other(int id, string name)
         : Renter(id, name, 5, 0){
 
 }

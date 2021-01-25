@@ -1,6 +1,6 @@
 #include <Student.h>
 
-Student::Student(int id, const string &name)
+Student::Student(int id, string name)
         : Renter(id, name, 15, 0){
 
 }

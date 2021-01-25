@@ -4,7 +4,7 @@
 
 class Other: public Renter {
 public:
-    Other(int id, const string &name);
+    Other(int id, string name);
     ~Other();
 };
 #endif //LIBRARY_OTHER_H

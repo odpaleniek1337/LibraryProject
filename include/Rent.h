@@ -1,14 +1,14 @@
 #ifndef LIBRARY_RENT_H
 #define LIBRARY_RENT_H
-#include "BorrowedItem.h"
+#include "Item.h"
 #include "Renter.h"
 
 class Rent {
 private:
-BorrowedItem item;
+Item item;
 Renter renter;
 public:
-    Rent(BorrowedItem item,Renter renter);
+    Rent(Item item, Renter renter);
     ~Rent();
 };
 #endif //LIBRARY_RENT_H

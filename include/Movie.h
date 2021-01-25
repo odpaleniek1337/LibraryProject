@@ -1,12 +1,13 @@
 #ifndef LIBRARY_MOVIE_H
 #define LIBRARY_MOVIE_H
-#include "BorrowedItem.h"
+#include "Item.h"
 
-class Movie : public BorrowedItem {
+class Movie : public Item {
 private:
     string director;
 public:
-    Movie(int ID, string title, string director, int quantity);
+    Movie(int id, string title, string director, int quantity);
+    string getDirector();
     ~Movie();
 };
 #endif //LIBRARY_MOVIE_H

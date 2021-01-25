@@ -4,7 +4,7 @@
 
 class Student: public Renter {
 public:
-    Student(int id, const string &name);
+    Student(int id, string name);
     ~Student();
 };
 #endif //LIBRARY_STUDENT_H

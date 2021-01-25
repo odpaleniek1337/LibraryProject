@@ -1,6 +1,6 @@
 #include "Staff.h"
 
-Staff::Staff(int id, const string &name)
+Staff::Staff(int id, string name)
         : Renter(id, name, 25, 0) {
 }
 
