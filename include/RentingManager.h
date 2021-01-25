@@ -3,21 +3,21 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include "Renter.h"
+#include "Rent.h"
 
 using std::string;
 using std::vector;
 
-class BorrowedItem;
-typedef std::shared_ptr<BorrowedItem> bItem;
+class Rent;
+typedef std::shared_ptr<Rent> bItem;
 
 class RentingManager {
 private:
     vector<bItem> rentedItems;
 public:
-    RentingManager(string repository);
+    RentingManager();
     ~RentingManager();
-    void addRent(BorrowedItem newItem,Renter renter);
-    void deleteRent(BorrowedItem oldItem,Renter renter);
+    void addRent(Rent newRent);
+    void deleteRent(Rent oldRent);
 };
 #endif //LIBRARY_RENTINGMANAGER_H
