@@ -1,6 +1,9 @@
 #include <Renter.h>
 
 int Renter::getCurrentItems() {
-    return 0;
+    return currentItems;
 }
+
+Renter::Renter(int id, const string &name, int maxItems, int currentItems) : ID(id), name(name), maxItems(maxItems),
+                                                                             currentItems(currentItems) {}
 

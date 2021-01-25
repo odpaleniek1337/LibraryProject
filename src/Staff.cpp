@@ -1,9 +1,10 @@
 #include "Staff.h"
 
-Staff::Staff(int ID, string name, int CurrentItems) {
-
+Staff::Staff(int id, const string &name)
+        : Renter(id, name, 25, 0) {
 }
 
 Staff::~Staff() {
 
 }
+

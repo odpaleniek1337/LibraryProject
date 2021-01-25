@@ -5,7 +5,7 @@ string BorrowedItem::getCurrentTime() {
 }
 
 int BorrowedItem::getID() {
-    return 0;
+    return BorrowedItem::ID;
 }
 
 string BorrowedItem::getBorrowedTime() {
@@ -13,5 +13,5 @@ string BorrowedItem::getBorrowedTime() {
 }
 
 int BorrowedItem::getQuantity() {
-    return 0;
+    return BorrowedItem::quantity;
 }
