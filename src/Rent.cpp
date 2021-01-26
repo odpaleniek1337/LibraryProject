@@ -8,7 +8,7 @@ Rent::~Rent() {
 
 }
 
-void Rent::setRent(Item item, Renter renter) {
+void Rent::setRent(Item item, std::shared_ptr<Renter> renter) {
     Rent::item = item;
     Rent::renter = renter;
     Rent::borrowedTime = time(NULL);

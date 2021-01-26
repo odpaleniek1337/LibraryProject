@@ -4,7 +4,8 @@
 
 class Staff: public Renter {
 public:
-    Staff(int id, string name);
+    Staff(int id, std::string name);
+    virtual std::string toString() override;
     ~Staff();
 };
 #endif //LIBRARY_STAFF_H
