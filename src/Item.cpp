@@ -30,3 +30,7 @@ int Item::getQuantity() {
 Item::~Item() {
 
 }
+
+string Item::getTitle() {
+    return Item::title;
+}
