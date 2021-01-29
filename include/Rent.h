@@ -12,6 +12,7 @@ std::shared_ptr<Renter> renter;
 time_t borrowedTime;
 public:
     void setRent(Item item, std::shared_ptr<Renter> renter);
+    time_t getTime();
     Rent();
     ~Rent();
 };

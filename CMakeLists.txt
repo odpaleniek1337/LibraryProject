@@ -20,7 +20,7 @@ add_executable(Library
         src/Movie.cpp
         src/Other.cpp
         src/Renter.cpp
-        src/RentingManger.cpp
+        src/RentingManager.cpp
         src/Staff.cpp
         src/Student.cpp
         include/Rent.h
