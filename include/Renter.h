@@ -16,5 +16,7 @@ public:
     int getID();
     virtual std::string toString() = 0;
     int getCurrentItems();
+    void addItem();
+    void returnItem();
 };
 #endif //LIBRARY_RENTER_H

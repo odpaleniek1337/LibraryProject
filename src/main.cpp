@@ -20,8 +20,9 @@ int main() {
     std::cout<<maciek.getName()<<std::endl;
     std::cout<<maciek.getID()<<std::endl;
     Rent rent1;
+    std::shared_ptr<Book> ksiazkawojtka = std::make_shared<Book>(wojtek);
     std::shared_ptr<Staff>maciekptr = std::make_shared<Staff>(maciek);
-    rent1.setRent(wojtek,maciekptr);
+    rent1.setRent(ksiazkawojtka,maciekptr);
     std::cout<<"gettime z wojtka: "<<rent1.getTime()<<std::endl;
     es.addRent(rent1);
     es.deleteRent(rent1);

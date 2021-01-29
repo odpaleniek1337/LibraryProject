@@ -7,12 +7,14 @@
 
 class Rent {
 private:
-Item item;//also shared_ptr/unique
+std::shared_ptr<Item> item;
 std::shared_ptr<Renter> renter;
 time_t borrowedTime;
 public:
-    void setRent(Item item, std::shared_ptr<Renter> renter);
+    void setRent(std::shared_ptr<Item> item, std::shared_ptr<Renter> renter);
     time_t getTime();
+    std::shared_ptr<Renter> getRenter();
+    std::shared_ptr<Item> getItem();
     Rent();
     ~Rent();
 };

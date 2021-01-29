@@ -20,3 +20,12 @@ int Renter::getID() {
 int Renter::getCurrentItems() {
     return Renter::currentItems;
 }
+
+void Renter::addItem() {
+    Renter::currentItems++;
+
+}
+
+void Renter::returnItem() {
+    Renter::currentItems--;
+}

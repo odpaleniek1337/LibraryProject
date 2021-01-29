@@ -12,9 +12,9 @@ void RentingManager::deleteRent(Rent oldRent/*time_t szef*/) {
     time(&returnTime);
     returnTime += 25;
     std::cout<<difftime(returnTime, oldRent.getTime())<<std::endl;
-    Rent rent = *RentingManager::rentedItems.back();
-    //get current time- calculate days something was rented
-    //rent.renter
+    Rent rent = *RentingManager::rentedItems.back();//tutaj powinno byc ze po id bierze np
+    rent.getRenter()->returnItem();
+    std::cout<<rent.getRenter()->getName()<<" returned "<<rent.getItem()->getTitle()<<std::endl;
     //zapisz ze dana ksiazka spowrotem zwrocona
     //print penalty, info abour who rented etc
     //no czy ten wektor ma jakies itemy wtedy moze popnac
