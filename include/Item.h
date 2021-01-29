@@ -16,6 +16,8 @@ public:
     int getID();
     string getTitle();
     int getQuantity();
+    void takeItem();
+    void returnItem();
     ~Item();
 };
 #endif //LIBRARY_ITEM_H

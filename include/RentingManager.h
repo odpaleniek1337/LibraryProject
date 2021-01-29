@@ -18,6 +18,7 @@ public:
     RentingManager();
     ~RentingManager();
     void addRent(Rent newRent);
-    void deleteRent(Rent oldRent);
+    void deleteRent(int id);
+    double getSize();
 };
 #endif //LIBRARY_RENTINGMANAGER_H

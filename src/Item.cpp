@@ -26,3 +26,12 @@ Item::~Item() {
 string Item::getTitle() {
     return Item::title;
 }
+
+void Item::takeItem() {
+    Item::quantity--;
+
+}
+
+void Item::returnItem() {
+    Item::quantity++;
+}

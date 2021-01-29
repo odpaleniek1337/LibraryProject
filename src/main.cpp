@@ -25,7 +25,7 @@ int main() {
     rent1.setRent(ksiazkawojtka,maciekptr);
     std::cout<<"gettime z wojtka: "<<rent1.getTime()<<std::endl;
     es.addRent(rent1);
-    es.deleteRent(rent1);
+    es.deleteRent(1);
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
