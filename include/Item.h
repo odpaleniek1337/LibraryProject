@@ -6,14 +6,16 @@ using std::string;
 class Item {
 private:
     int ID;
-    string title;
+    std::string title;
+    std::string author;
     int maxDays;
     int quantity;
 public:
     Item();
-    Item(int id, string title, int maxDays, int quantity);
+    Item(int id, std::string title, std::string author, int maxDays, int quantity);
     int getID();
-    string getTitle();
+    std::string getTitle();
+    std::string getAuthor();
     int getQuantity();
     void takeItem();
     void returnItem();

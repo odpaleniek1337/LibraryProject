@@ -1,11 +1,6 @@
 #include "Movie.h"
 
-Movie::Movie(int id, string title, string director, int quantity) : Item(id, title,10, quantity) {
-    Movie::director = director;
-}
-
-string Movie::getDirector() {
-    return Movie::director;
+Movie::Movie(int id, std::string title, std::string director, int quantity) : Item(id, title, director, 10, quantity) {
 }
 
 Movie::~Movie() {
