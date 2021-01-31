@@ -1,7 +1,7 @@
 #include <Student.h>
 
 Student::Student(int id, std::string name)
-        : Renter(id, name, 15, 0){
+        : Renter(id, name, 3, 0){
 
 }
 
@@ -16,7 +16,7 @@ std::string Student::toString() {
     output.append(std::to_string(Renter::getID()));
     output.append(" rented ");
     output.append(std::to_string(Renter::getCurrentItems()));
-    output.append("/15 items");
+    output.append("/3 items");
     return output;
 }
 
