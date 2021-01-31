@@ -5,7 +5,7 @@ Renter::Renter(int id, string name, int maxItems, int currentItems) : ID(id), na
 
 Renter::Renter(){
     Renter::ID = 0;
-    Renter::name = 'None';
+    Renter::name = "None";
     Renter::maxItems = 0;
     Renter::currentItems = 0;
 }
