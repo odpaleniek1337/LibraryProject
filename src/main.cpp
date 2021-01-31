@@ -114,8 +114,8 @@ int main() {
     RentingManager es;
 
     read_Rents(es);
-    //es.deleteRent(1);
-    //es.deleteRent(2);
+    es.deleteRent(1);
+    es.deleteRent(2);
 
     return 0;
 }
