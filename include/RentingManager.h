@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include "Rent.h"
+#include "Rent.h" //moze to usunac
 
 using std::string;
 using std::vector;
