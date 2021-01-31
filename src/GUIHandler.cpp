@@ -4,9 +4,13 @@ GUIHandler::GUIHandler(std::shared_ptr<DataBase> base, QWidget *parent) : QMainW
     GUIHandler::base = base;
     updateRentersSize(base->getRentersSize());
     updateItemsSize(base->getItemsSize());
-    QWidget currentWindow;
-    QTableView *usersView = new QTableView();
-    QStandardItemModel usersModel;
+    updateRenters();
+    updateItems();
+    updateLayout();
+}
+
+void GUIHandler::updateRenters() {
+    usersView = new QTableView();
     usersModel.setHorizontalHeaderLabels({QApplication::translate("users", "ID"),
                                           QApplication::translate("users", "Name"),
                                           QApplication::translate("users", "CurrentItems"),
@@ -26,27 +30,10 @@ GUIHandler::GUIHandler(std::shared_ptr<DataBase> base, QWidget *parent) : QMainW
     usersView->setModel(&usersModel);
     usersView->verticalHeader()->hide();
 
-    QTableView itemsView;
-    updateItems(itemsView);
-    QHBoxLayout *upperLayout = new QHBoxLayout();
-    upperLayout->addWidget(usersView); //creating upperpart of layout
-    upperLayout->addWidget(&itemsView);
-
-    QHBoxLayout *lowerLayout = new QHBoxLayout(); //creating lowerpart of layout
-
-    QVBoxLayout *mainLayout = new QVBoxLayout();
-    mainLayout->addLayout(upperLayout);
-    mainLayout->addLayout(lowerLayout);
-    std::cout<<"ID"<<std::endl;
-    currentWindow.setLayout(mainLayout);
 }
 
-GUIHandler::~GUIHandler() {
-
-}
-
-void GUIHandler::updateItems(QTableView &itemsView) {
-    QStandardItemModel itemsModel;
+void GUIHandler::updateItems() {
+    itemsView = new QTableView();
     itemsModel.setHorizontalHeaderLabels({QApplication::translate("items", "ID"),
                                           QApplication::translate("items", "Name"),
                                           QApplication::translate("items", "Author"),
@@ -65,8 +52,26 @@ void GUIHandler::updateItems(QTableView &itemsView) {
         itemsModel.appendRow(newItemsData);
     }
 
-    itemsView.setModel(&itemsModel);
-    itemsView.verticalHeader()->hide();
+    itemsView->setModel(&itemsModel);
+    itemsView->verticalHeader()->hide();
+}
+
+
+void GUIHandler::updateLayout() {
+    upperLayout = new QHBoxLayout();
+    upperLayout->addWidget(usersView); //creating upperpart of layout
+    upperLayout->addWidget(itemsView);
+
+    lowerLayout = new QHBoxLayout(); //creating lowerpart of layout
+
+    mainLayout = new QVBoxLayout();
+
+    mainLayout->addLayout(upperLayout);
+    mainLayout->addLayout(lowerLayout);
+
+    auto central = new QWidget;
+    central->setLayout(mainLayout);
+    setCentralWidget(central);
 }
 
 void GUIHandler::updateRentersSize(int size) {
@@ -75,5 +80,9 @@ void GUIHandler::updateRentersSize(int size) {
 
 void GUIHandler::updateItemsSize(int size) {
     itemsSize = size;
+}
+
+GUIHandler::~GUIHandler() {
+
 }
 
