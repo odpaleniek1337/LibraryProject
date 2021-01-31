@@ -24,6 +24,8 @@ public:
     void addItem(item newItem);
     renter getRenter(int id);
     item getItem(int id);
+    int getRentersSize();
+    int getItemsSize();
 };
 
 #endif //LIBRARY_DATABASE_H

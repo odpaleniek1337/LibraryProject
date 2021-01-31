@@ -21,6 +21,10 @@ int Renter::getCurrentItems() {
     return Renter::currentItems;
 }
 
+int Renter::getMaxItems() {
+    return Renter::maxItems;
+}
+
 void Renter::addItem() {
     Renter::currentItems++;
 

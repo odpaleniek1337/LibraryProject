@@ -16,6 +16,7 @@ public:
     int getID();
     virtual std::string toString() = 0;
     int getCurrentItems();
+    int getMaxItems();
     void addItem();
     void returnItem();
 };

@@ -28,11 +28,11 @@ void DataBase::readFile() {
         while (getline(sI, wordI, ',')) {
             rowI.push_back(wordI);
         }
-        for (int i=0;i<rowI.size();i++)
+        /*for (int i=0;i<rowI.size();i++)
         {
             std::cout<<rowI[i]<<" ";
         }
-        std::cout<<std::endl;
+        std::cout<<std::endl;*/
         if(rowI.size()==5){//check czy ma odpowiednia ilosc wartosci w linii
             if (rowI[0] == "Book") {
                 Book newBook = Book(stoi(rowI[1]), rowI[2], rowI[3], stoi(rowI[4]));
@@ -62,22 +62,24 @@ void DataBase::readFile() {
         while (getline(sR, wordR, ',')) {
             rowR.push_back(wordR);
         }
-        for (int i=0;i<rowR.size();i++)
+        /*for (int i=0;i<rowR.size();i++)
         {
             std::cout<<rowR[i]<<" ";
         }
-        std::cout<<std::endl;
+        std::cout<<std::endl;*/
         if (rowR.size() == 3) {//check czy ma odpowiednia ilosc wartosci w linii
             if (rowR[0] == "Other") {
                 Other newOther = Other(stoi(rowR[1]), rowR[2]);
                 std::shared_ptr<Other> otherptr = std::make_shared<Other>(newOther);
                 DataBase::addRenter(otherptr);
-            } else if (rowI[0] == "Staff") {
+            }
+            else if (rowR[0] == "Staff") {
                 Staff newStaff = Staff(stoi(rowR[1]), rowR[2]);
                 std::shared_ptr<Staff> staffptr = std::make_shared<Staff>(newStaff);
                 DataBase::addRenter(staffptr);
 
-            } else if (rowI[0] == "Student") {
+            }
+            else if (rowR[0] == "Student") {
                 Student newStudent = Student(stoi(rowR[1]), rowR[2]);
                 std::shared_ptr<Student> studentptr = std::make_shared<Student>(newStudent);
                 DataBase::addRenter(studentptr);
@@ -114,9 +116,17 @@ void DataBase::addItem(item newItem) {
 }
 
 renter DataBase::getRenter(int id) {
-    return renters.at(id-1);
+    return renters.at(id);
 }
 
 item DataBase::getItem(int id) {
-    return items.at(id-1);
+    return items.at(id);
+}
+
+int DataBase::getRentersSize() {
+    return renters.size();
+}
+
+int DataBase::getItemsSize() {
+    return items.size();
 }
