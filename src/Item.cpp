@@ -35,3 +35,7 @@ void Item::takeItem() {
 void Item::returnItem() {
     Item::quantity++;
 }
+
+int Item::getDays() {
+    return Item::maxDays;
+}

@@ -9,7 +9,6 @@ private:
     string title;
     int maxDays;
     int quantity;
-
 public:
     Item();
     Item(int id, string title, int maxDays, int quantity);
@@ -18,6 +17,7 @@ public:
     int getQuantity();
     void takeItem();
     void returnItem();
+    int getDays();
     ~Item();
 };
 #endif //LIBRARY_ITEM_H
