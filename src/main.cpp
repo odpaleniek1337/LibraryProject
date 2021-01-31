@@ -13,8 +13,8 @@ using std::make_shared;
 int main(int argc, char *argv[]) {
     RentingManager es;
     DataBase base;
-    //es.deleteRent(1);
-    //es.deleteRent(2);
+    es.deleteRent(1);
+    es.deleteRent(2);
     base.readFile();
 
     int rentersSize = base.getRentersSize();
