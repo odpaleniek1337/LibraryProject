@@ -1,30 +1,26 @@
 #include <iostream>
-#include "time.h"
 #include "RentingManager.h"
-#include "Staff.h"
 #include "Book.h"
+#include "Movie.h"
+#include "Staff.h"
+#include "Student.h"
+#include "Other.h"
 #include <fstream>
 #include <vector>
-#include "Rent.h"
 #include <sstream>
 #include <string>
-#include <Movie.h>
-#include <Student.h>
-#include <Other.h>
+#include <QApplication>
+#include <QtWidgets>
 
 using namespace std;
 
 void read_Rents(RentingManager &pointer) {
 
-    // File pointer
     fstream finBook, finRenter;
 
-    // Open an existing file
     finBook.open("books.csv", ios::in);
     finRenter.open("renters.csv", ios::in);
 
-    // Read the Data from the file
-    // as String Vector
     vector<string> rowB;
     vector<string> rowR;
     string lineB, wordB, tempB;
@@ -35,27 +31,17 @@ void read_Rents(RentingManager &pointer) {
         rowB.clear();
         rowR.clear();
 
-        // read an entire row and
-        // store it in a string variable 'line'
         getline(finBook, lineB);
         getline(finRenter, lineR);
 
-        // used for breaking words
         stringstream sB(lineB);
         stringstream sR(lineR);
 
-        // read every column data of a row and
-        // store it in a string variable, 'word'
         while (getline(sB, wordB, ',')) {
-
-            // add all the column data
-            // of a row to a vector
             rowB.push_back(wordB);
         }
         while (getline(sR, wordR, ',')) {
 
-            // add all the column data
-            // of a row to a vector
             rowR.push_back(wordR);
         }
 
@@ -71,7 +57,6 @@ void read_Rents(RentingManager &pointer) {
         cout<<endl;*/
 
         if (rowB[0] == "Book") {
-            // Print the found data
             Book book1 = Book(stoi(rowB[1]), rowB[2], rowB[3], stoi(rowB[4]));
             shared_ptr<Book> bookptr = make_shared<Book>(book1);
             if (rowR[0] == "Staff") {
@@ -88,7 +73,6 @@ void read_Rents(RentingManager &pointer) {
             }
             if (rowR[0] == "Other") {
 
-                // Print the found data
                 Other wojtek(stoi(rowR[1]), rowR[2]);
                 std::shared_ptr<Other> otherptr = std::make_shared<Other>(wojtek);
                 rent1.setRent(bookptr, otherptr);
@@ -96,7 +80,6 @@ void read_Rents(RentingManager &pointer) {
         }
         if (rowB[0] == "Movie") {
 
-            // Print the found data
             Movie movie1 = Movie(stoi(rowB[1]), rowB[2], rowB[3], stoi(rowB[4]));
             shared_ptr<Movie> movieptr = make_shared<Movie>(movie1);
             if (rowR[0] == "Staff") {
@@ -125,21 +108,27 @@ void read_Rents(RentingManager &pointer) {
     }
 }
 
-int main() {
-    RentingManager es;
-    RentingManager *ptr = &es;
-    read_Rents(es);
+int main(int argc, char *argv[]) {
+    //RentingManager es;
+    //read_Rents(es);
     /*time_t borrowedTime = time(NULL);
     struct tm * time = localtime(&borrowedTime);
     std::cout<<asctime(time)<<std::endl;*/
-    Book ksiega = Book(13,"Kordian", "Adam Malysz", 5);
+    /*Book ksiega = Book(13,"Kordian", "Adam Malysz", 5);
     Staff maciek = Staff(1, "Maciek");
     Rent rent1;
     std::shared_ptr<Book> ksiazkawojtka = std::make_shared<Book>(ksiega);
     std::shared_ptr<Staff>maciekptr = std::make_shared<Staff>(maciek);
     rent1.setRent(ksiazkawojtka,maciekptr);
     es.addRent(rent1);
-    es.deleteRent(1);
-    es.deleteRent(2);
-    return 0;
+    es.deleteRent(1);*/
+    QApplication app(argc, argv);
+    QWidget window;
+    window.resize(1080, 720);
+    window.show();
+    window.setWindowTitle(QApplication::translate("childwidget", "Library"));
+    QLabel *users = new QLabel(QApplication::translate("childwidget", "List of Users"), &window);
+    users->show();
+    return app.exec();
+    //es.deleteRent(2);
 }

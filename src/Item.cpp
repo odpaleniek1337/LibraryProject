@@ -5,7 +5,7 @@ Item::Item(int id, string title, int maxDays, int quantity) : ID(id), title(titl
 }
 Item::Item(){
     Item::ID = 0;
-    Item::title = 'None';
+    Item::title = "None";
     Item::maxDays = 0;
     Item::quantity = 0;
 }
