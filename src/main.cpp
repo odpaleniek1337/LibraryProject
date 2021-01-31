@@ -19,7 +19,7 @@ void read_Rents(RentingManager &pointer) {
     fstream finBook, finRenter;
     int check=0;
 
-    finBook.open("../books.csv", ios::in);
+    finBook.open("../items.csv", ios::in);
     finRenter.open("../renters.csv", ios::in);
 
     vector<string> rowB;
