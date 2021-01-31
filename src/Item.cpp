@@ -1,11 +1,11 @@
 #include "Item.h"
 
-Item::Item(int id, string title, int maxDays, int quantity) : ID(id), title(title), maxDays(maxDays),
-                                                                     quantity(quantity) {
+Item::Item(int id, std::string title, std::string author, int maxDays, int quantity) : ID(id), title(title), author(author), maxDays(maxDays), quantity(quantity) {
 }
 Item::Item(){
     Item::ID = 0;
     Item::title = "None";
+    Item::author = "None";
     Item::maxDays = 0;
     Item::quantity = 0;
 }
@@ -23,8 +23,11 @@ Item::~Item() {
 
 }
 
-string Item::getTitle() {
+std::string Item::getTitle() {
     return Item::title;
+}
+std::string Item::getAuthor() {
+    return Item::author;
 }
 
 void Item::takeItem() {

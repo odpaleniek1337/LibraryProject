@@ -4,10 +4,8 @@
 
 class Book : public Item {
 private:
-    string author;
 public:
-    Book(int id,string title, string author, int quantity);
-    string getAuthor();
+    Book(int id,std::string title, std::string author, int quantity);
     ~Book();
 };
 #endif //LIBRARY_BOOK_H

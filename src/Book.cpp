@@ -1,13 +1,9 @@
 #include "Book.h"
 
-Book::Book(int id,string title, string author, int quantity) : Item(id, title,30, quantity) {
-    Book::author = author;
+Book::Book(int id,std::string title, std::string author, int quantity) : Item(id, title,author, 30, quantity) {
 }
 
 Book::~Book() {}
 
-string Book::getAuthor()  {
-    return author;
-}
 
 

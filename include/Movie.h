@@ -4,10 +4,8 @@
 
 class Movie : public Item {
 private:
-    string director;
 public:
-    Movie(int id, string title, string director, int quantity);
-    string getDirector();
+    Movie(int id, std::string title, std::string director, int quantity);
     ~Movie();
 };
 #endif //LIBRARY_MOVIE_H
