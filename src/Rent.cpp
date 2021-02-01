@@ -23,11 +23,11 @@ std::shared_ptr<Item> Rent::getItem() {
     return Rent::item;
 }
 
-void Rent::setID(double id) {
+void Rent::setID(int id) {
     Rent::id = id;
 
 }
-double Rent::getID() {
+int Rent::getID() {
     return Rent::id;
 
 }

@@ -8,13 +8,13 @@ class Rent {
 private:
 std::shared_ptr<Item> item;
 std::shared_ptr<Renter> renter;
-double id;
+int id;
 public:
     void setRent(std::shared_ptr<Item> item, std::shared_ptr<Renter> renter);
     std::shared_ptr<Renter> getRenter();
     std::shared_ptr<Item> getItem();
-    void setID(double id);
-    double getID();
+    void setID(int id);
+    int getID();
     Rent();
     ~Rent();
 };
