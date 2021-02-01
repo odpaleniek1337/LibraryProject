@@ -3,12 +3,10 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include "Rent.h" //moze to usunac
-
+#include "Rent.h"
 using std::string;
 using std::vector;
 
-class Rent;
 typedef std::shared_ptr<Rent> bItem;
 
 class RentingManager {

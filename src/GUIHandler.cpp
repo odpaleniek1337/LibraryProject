@@ -1,4 +1,5 @@
 #include "GUIHandler.h"
+#include <iostream>
 
 GUIHandler::GUIHandler(std::shared_ptr<DataBase> base, std::shared_ptr<RentingManager> manager, QWidget *parent) : QMainWindow(parent){
     GUIHandler::base = base;
@@ -71,8 +72,7 @@ void GUIHandler::updateRents() {
     rentsModel.clear();
     rentsModel.setHorizontalHeaderLabels({QApplication::translate("rents", "ID"),
                                           QApplication::translate("rents", "Renter"),
-                                          QApplication::translate("rents", "Title"),
-                                          QApplication::translate("rents", "BorrowedTime")});
+                                          QApplication::translate("rents", "Title")});
 
     QList<QStandardItem*> newRentsData;
     for (int i = 0; i < rentsSize; i++) {
@@ -81,7 +81,6 @@ void GUIHandler::updateRents() {
         newRentsData.append(new QStandardItem(QString::number(currentRentptr->getID())));
         newRentsData.append(new QStandardItem(QString::fromStdString(currentRentptr->getRenter()->getName())));
         newRentsData.append(new QStandardItem(QString::fromStdString(currentRentptr->getItem()->getTitle())));
-        newRentsData.append(new QStandardItem(QString::number(currentRentptr->getTime()->tm_sec)));
         rentsModel.appendRow(newRentsData);
     }
 
@@ -202,8 +201,6 @@ void GUIHandler::deleteRentButton_clicked() {
         msgBox.exec();
         std::cout<<"No Rents left to delete"<<std::endl;
     }
-    //std::shared
-
 }
 
 GUIHandler::~GUIHandler() {

@@ -1,5 +1,4 @@
 #include "Other.h"
-#include "Renter.h"
 
 Other::Other(int id, std::string name)
         : Renter(id, name, 2, 0){

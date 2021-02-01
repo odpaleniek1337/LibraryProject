@@ -4,10 +4,6 @@
 #include "Item.h"
 #include <vector>
 #include <memory>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <iostream>
 
 typedef std::shared_ptr<Renter> renter;
 typedef std::shared_ptr<Item> item;

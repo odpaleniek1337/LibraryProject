@@ -1,3 +1,7 @@
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <iostream>
 #include "DataBase.h"
 #include "Book.h"
 #include "Movie.h"
@@ -19,7 +23,7 @@ void DataBase::readFile() {
     int check2 = 0;
     try {
         finItem.open("../items.csv", std::ios::in);
-        if( !finItem ) throw std::ios::failure( "Error opening file!" );
+        if( !finItem ) throw std::ios::failure( "Error in opening file!" );
         std::vector<string> rowI;
         string lineI, wordI, tempI;
         while (finItem.good()) {
@@ -29,11 +33,6 @@ void DataBase::readFile() {
             while (getline(sI, wordI, ',')) {
                 rowI.push_back(wordI);
             }
-            /*for (int i=0;i<rowI.size();i++)
-            {
-                std::cout<<rowI[i]<<" ";
-            }
-            std::cout<<std::endl;*/
             if (rowI.size() == 5) {//check czy ma odpowiednia ilosc wartosci w linii
                 if (rowI[0] == "Book") {
                     Book newBook = Book(stoi(rowI[1]), rowI[2], rowI[3], stoi(rowI[4]));
@@ -68,11 +67,6 @@ void DataBase::readFile() {
             while (getline(sR, wordR, ',')) {
                 rowR.push_back(wordR);
             }
-            /*for (int i=0;i<rowR.size();i++)
-            {
-                std::cout<<rowR[i]<<" ";
-            }
-            std::cout<<std::endl;*/
             if (rowR.size() == 3) {//check czy ma odpowiednia ilosc wartosci w linii
                 if (rowR[0] == "Other") {
                     Other newOther = Other(stoi(rowR[1]), rowR[2]);
