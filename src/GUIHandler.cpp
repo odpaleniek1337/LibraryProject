@@ -1,7 +1,7 @@
 #include "GUIHandler.h"
 #include <iostream>
 
-GUIHandler::GUIHandler(std::shared_ptr<DataBase> base, std::shared_ptr<RentingManager> manager, QWidget *parent) : QMainWindow(parent){
+GUIHandler::GUIHandler(const std::shared_ptr<DataBase>& base, std::shared_ptr<RentingManager> manager, QWidget *parent) : QMainWindow(parent){
     GUIHandler::base = base;
     GUIHandler::manager = manager;
     updateRentersSize(base->getRentersSize());
@@ -158,8 +158,8 @@ void GUIHandler::updateRentsSize(int size) {
 }
 
 void GUIHandler::addRentButton_clicked() {
-    double userID = chooseBoxUser->currentIndex();
-    double itemID = chooseBoxItem->currentIndex();
+    int userID = chooseBoxUser->currentIndex();
+    int itemID = chooseBoxItem->currentIndex();
     std::shared_ptr<Renter> newRenter = GUIHandler::base->getRenter(userID);
     std::shared_ptr<Item> newItem = GUIHandler::base->getItem(itemID);
     if ( (newRenter->getCurrentItems() < newRenter->getMaxItems() ) && ( newItem->getQuantity() > 0 ) ) {
@@ -183,7 +183,7 @@ void GUIHandler::addRentButton_clicked() {
 }
 
 void GUIHandler::deleteRentButton_clicked() {
-    double rentID = chooseBoxRent->currentIndex();
+    int rentID = chooseBoxRent->currentIndex();
     if(manager->getSize()>0){
         std::cout<<manager->getRent(rentID)->getRenter()->getName()<<" returned "<<manager->getRent(rentID)->getItem()->getTitle()<<std::endl;
         GUIHandler::manager->deleteRent(rentID);
