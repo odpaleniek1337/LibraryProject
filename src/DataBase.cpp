@@ -19,15 +19,9 @@ void DataBase::readFile() {
     int check2 = 0;
     try {
         finItem.open("../items.csv", std::ios::in);
-        if( !finItem ) throw std::ios::failure( "Error opening file!" ) ;
-    }
-    catch(std::exception const& e)
-    {
-        check1++;
-        std::cerr << e.what() <<" for items.csv file"<<std::endl;
-    }
-    std::vector<string> rowI;
-    string lineI, wordI, tempI;
+        if( !finItem ) throw std::ios::failure( "Error opening file!" );
+        std::vector<string> rowI;
+        string lineI, wordI, tempI;
         while (finItem.good()) {
             rowI.clear();
             std::getline(finItem, lineI);
@@ -54,20 +48,19 @@ void DataBase::readFile() {
                 check1++;
             }
         }
-
-    finItem.close();
-    try {
-        finRenter.open("../renters.csv", std::ios::in);
-        if( !finRenter ) throw std::ios::failure( "Error opening file!" ) ;
     }
     catch(std::exception const& e)
     {
-        check2++;
-        std::cerr << e.what() <<" for renters.csv file"<<std::endl;
+        check1++;
+        std::cerr << e.what() <<" for items.csv file"<<std::endl;
     }
+    finItem.close();
 
-    std::vector<string> rowR;
-    string lineR, wordR, tempR;
+    try {
+        finRenter.open("../renters.csv", std::ios::in);
+        if( !finRenter ) throw std::ios::failure( "Error opening file!" ) ;
+        std::vector<string> rowR;
+        string lineR, wordR, tempR;
         while (finRenter.good()) {
             rowR.clear();
             std::getline(finRenter, lineR);
@@ -100,6 +93,12 @@ void DataBase::readFile() {
             }
         }
 
+    }
+    catch(std::exception const& e)
+    {
+        check2++;
+        std::cerr << e.what() <<" for renters.csv file"<<std::endl;
+    }
     finRenter.close();
     if(check1==0){
         if(check2==0) std::cout<<"Database loaded!"<<std::endl;

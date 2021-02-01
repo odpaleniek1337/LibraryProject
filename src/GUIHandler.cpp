@@ -11,6 +11,7 @@ GUIHandler::GUIHandler(std::shared_ptr<DataBase> base, std::shared_ptr<RentingMa
     updateRents();
     createChooseButtonUsers();
     createChooseButtonItems();
+    createChooseButtonRents();
     createRentButtons();
     updateLayout();
 }
@@ -65,7 +66,7 @@ void GUIHandler::updateItems() {
 }
 
 
-void GUIHandler::updateRents() {//nie widac, ze dziala bo nie ma zadnych rentow jeszcze
+void GUIHandler::updateRents() {
     rentsView = new QTableView();
     rentsModel.clear();
     rentsModel.setHorizontalHeaderLabels({QApplication::translate("rents", "ID"),
@@ -95,8 +96,9 @@ void GUIHandler::updateLayout() {
     upperLayout->addWidget(usersView); //creating upperpart of layout
     upperLayout->addWidget(itemsView);
 
-    middleLayout = new QHBoxLayout();
+    middleLayout = new QHBoxLayout(); //creating middlepart of layout
     middleLayout->addWidget(rentsView);
+    middleLayout->addWidget(chooseBoxRent);
     middleLayout->addWidget(deleteRentButton);
 
     lowerLayout = new QHBoxLayout(); //creating lowerpart of layout
@@ -127,11 +129,24 @@ void GUIHandler::createChooseButtonItems() {
         chooseBoxItem->addItem(QString::fromStdString(base->getItem(k)->getTitle()));
 }
 
+void GUIHandler::createChooseButtonRents() {
+    chooseBoxRent = new QComboBox;
+}
+void GUIHandler::updateChooseButtonRents() {
+    chooseBoxRent->clear();
+    for (int k = 0; k < rentsSize; k++) {
+        chooseBoxRent->addItem(QString::number(manager->getRent(k)->getID()));
+        std::cout << manager->getRent(k)->getID() << std::endl;
+    }
+}
+
 void GUIHandler::createRentButtons() {
     addRentButton = new QPushButton(this);
     addRentButton->setText("Borrow");
     connect(addRentButton, SIGNAL(clicked()),this,SLOT(addRentButton_clicked()));
-    deleteRentButton = new QPushButton("Delete Rent");
+    deleteRentButton = new QPushButton(this);
+    deleteRentButton->setText("Delete Rent");
+    connect(deleteRentButton, SIGNAL(clicked()),this,SLOT(deleteRentButton_clicked()));
 }
 
 void GUIHandler::updateRentersSize(int size) {
@@ -159,11 +174,30 @@ void GUIHandler::addRentButton_clicked() {
         GUIHandler::updateRenters();
         GUIHandler::updateItems();
         GUIHandler::updateRents();
+        GUIHandler::updateChooseButtonRents();
         std::cout << "USERID " << userID << " borrowed item with ID " << itemID << std::endl;
     }
     else {
+        //popup jakis ze za duzo czy cos
         std::cout<<"Limit reached!"<<std::endl;
     }
+}
+
+void GUIHandler::deleteRentButton_clicked() {
+    double rentID = chooseBoxRent->currentIndex();
+    if(manager->getSize()>0){
+    GUIHandler::manager->deleteRent(rentID);
+    GUIHandler::updateRentsSize(manager->getSize());
+    GUIHandler::updateRenters();
+    GUIHandler::updateItems();
+    GUIHandler::updateRents();
+    GUIHandler::updateChooseButtonRents();
+    }
+    else{
+        std::cout<<"No Rents left to delete"<<std::endl;
+    }
+    //std::shared
+
 }
 
 GUIHandler::~GUIHandler() {

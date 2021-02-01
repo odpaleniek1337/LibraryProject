@@ -2,29 +2,31 @@
 #include <iostream>
 
 void RentingManager::addRent(Rent newRent) {
-    newRent.setID(RentingManager::getSize()+1);
+    newRent.setID(RentingManager::getIDRent()+1);
+    RentingManager::idRent++;
     std::shared_ptr<Rent> rent = std::make_shared<Rent>(newRent);
     RentingManager::rentedItems.push_back(rent);
 }
 
 void RentingManager::deleteRent(int id) {
-    time_t returnTime;
-    returnTime = time(NULL);//get_time from jakas funkcja (MANAGER JEDNAK XD)
-    time(&returnTime);
-    returnTime += 25;
-    Rent rent = *RentingManager::rentedItems.back();//tutaj powinno byc ze po id bierze np //id-1 powinno byc, bo zaczniemy id od 1,2,3,4,5 etc a nie 0,1,2,3,4
+    //time_t returnTime;
+    //returnTime = time(NULL);//get_time from jakas funkcja (MANAGER JEDNAK XD)
+    //time(&returnTime);
+    //returnTime += 25;
+    std::shared_ptr<Rent> deletedRent = RentingManager::getRent(id);
+    deletedRent->getRenter()->returnItem();
+    deletedRent->getItem()->returnItem();
+    RentingManager::rentedItems.erase(rentedItems.begin()+id);
     //std::cout<<difftime(returnTime, rent.getTime())<<std::endl;
-    rent.getRenter()->returnItem();
-    rent.getItem()->returnItem();
-    std::cout<<rent.getRenter()->getName()<<" returned "<<rent.getItem()->getTitle()<<std::endl;
+    //std::cout<<rent.getRenter()->getName()<<" returned "<<rent.getItem()->getTitle()<<std::endl;
     //zapisz ze dana ksiazka spowrotem zwrocona
     //print penalty, info abour who rented etc
     //no czy ten wektor ma jakies itemy wtedy moze popnac
-    RentingManager::rentedItems.pop_back();
+    //RentingManager::rentedItems.pop_back();
 }
 
 RentingManager::RentingManager() {
-
+    RentingManager::idRent=0;
 }
 
 RentingManager::~RentingManager() {
@@ -37,4 +39,8 @@ double RentingManager::getSize() {
 
 bItem RentingManager::getRent(int id) {
     return rentedItems.at(id);
+}
+
+double RentingManager::getIDRent() {
+    return RentingManager::idRent;
 }

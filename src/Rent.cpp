@@ -9,7 +9,6 @@ Rent::~Rent() {
 }
 
 void Rent::setRent(std::shared_ptr<Item> item, std::shared_ptr<Renter> renter) {
-    //if quantity > 0;
     Rent::item = item;
     Rent::renter = renter;
     time_t currentTime;
