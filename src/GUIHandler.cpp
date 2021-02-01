@@ -129,7 +129,7 @@ void GUIHandler::createChooseButtonItems() {
 
 void GUIHandler::createRentButtons() {
     addRentButton = new QPushButton(this);
-    addRentButton->setText("JD");
+    addRentButton->setText("Borrow");
     connect(addRentButton, SIGNAL(clicked()),this,SLOT(addRentButton_clicked()));
     deleteRentButton = new QPushButton("Delete Rent");
 }
@@ -151,14 +151,19 @@ void GUIHandler::addRentButton_clicked() {
     double itemID = chooseBoxItem->currentIndex();
     std::shared_ptr<Renter> newRenter = GUIHandler::base->getRenter(userID);
     std::shared_ptr<Item> newItem = GUIHandler::base->getItem(itemID);
-    Rent newRent;
-    newRent.setRent(newItem, newRenter);
-    GUIHandler::manager->addRent(newRent);
-    GUIHandler::updateRentsSize(manager->getSize());
-    GUIHandler::updateRenters();
-    GUIHandler::updateItems();
-    GUIHandler::updateRents();
-    std::cout<<"USERID "<<userID<<" borrowed item with ID "<<itemID<<std::endl;
+    if ( (newRenter->getCurrentItems() < newRenter->getMaxItems() ) && ( newItem->getQuantity() > 0 ) ) {
+        Rent newRent;
+        newRent.setRent(newItem, newRenter);
+        GUIHandler::manager->addRent(newRent);
+        GUIHandler::updateRentsSize(manager->getSize());
+        GUIHandler::updateRenters();
+        GUIHandler::updateItems();
+        GUIHandler::updateRents();
+        std::cout << "USERID " << userID << " borrowed item with ID " << itemID << std::endl;
+    }
+    else {
+        std::cout<<"Limit reached!"<<std::endl;
+    }
 }
 
 GUIHandler::~GUIHandler() {
