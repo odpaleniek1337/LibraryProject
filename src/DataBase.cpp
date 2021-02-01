@@ -33,13 +33,13 @@ void DataBase::readFile() {
             while (getline(sI, wordI, ',')) {
                 rowI.push_back(wordI);
             }
-            if (rowI.size() == 5) {//check czy ma odpowiednia ilosc wartosci w linii
+            if (rowI.size() == 4) {//check czy ma odpowiednia ilosc wartosci w linii
                 if (rowI[0] == "Book") {
-                    Book newBook = Book(stoi(rowI[1]), rowI[2], rowI[3], stoi(rowI[4]));
+                    Book newBook = Book(stoi(rowI[1]), rowI[2], rowI[3]);
                     std::shared_ptr<Book> bookptr = std::make_shared<Book>(newBook);
                     DataBase::addItem(bookptr);
                 } else if (rowI[0] == "Movie") {
-                    Movie newMovie = Movie(stoi(rowI[1]), rowI[2], rowI[3], stoi(rowI[4]));
+                    Movie newMovie = Movie(stoi(rowI[1]), rowI[2], rowI[3]);
                     std::shared_ptr<Movie> movieptr = std::make_shared<Movie>(newMovie);
                     DataBase::addItem(movieptr);
                 }

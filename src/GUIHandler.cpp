@@ -47,7 +47,6 @@ void GUIHandler::updateItems() {
     itemsModel.setHorizontalHeaderLabels({QApplication::translate("items", "ID"),
                                           QApplication::translate("items", "Title"),
                                           QApplication::translate("items", "Author"),
-                                          QApplication::translate("items", "MaxDays"),
                                           QApplication::translate("items", "Available")});
 
     QList<QStandardItem*> newItemsData;
@@ -57,7 +56,6 @@ void GUIHandler::updateItems() {
         newItemsData.append(new QStandardItem(QString::number(currentItemptr->getID())));
         newItemsData.append(new QStandardItem(QString::fromStdString(currentItemptr->getTitle())));
         newItemsData.append(new QStandardItem(QString::fromStdString(currentItemptr->getAuthor())));
-        newItemsData.append(new QStandardItem(QString::number(currentItemptr->getDays())));
         newItemsData.append(new QStandardItem(QString::number(currentItemptr->getQuantity())));
         itemsModel.appendRow(newItemsData);
     }
