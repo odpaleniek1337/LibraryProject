@@ -12,13 +12,14 @@ void Rent::setRent(std::shared_ptr<Item> item, std::shared_ptr<Renter> renter) {
     //if quantity > 0;
     Rent::item = item;
     Rent::renter = renter;
-    Rent::borrowedTime = time(NULL);
-    time(&borrowedTime);
+    time_t currentTime;
+    time(&currentTime);
+    Rent::borrowedTime = localtime(&currentTime);
     renter->addItem();
     item->takeItem();
 }
 
-time_t Rent::getTime() {
+tm* Rent::getTime() {
     return Rent::borrowedTime;
 }
 
@@ -32,6 +33,10 @@ std::shared_ptr<Item> Rent::getItem() {
 
 void Rent::setID(double id) {
     Rent::id = id;
+
+}
+double Rent::getID() {
+    return Rent::id;
 
 }
 
