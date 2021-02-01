@@ -6,16 +6,17 @@ using std::string;
 class Item {
 private:
     int ID;
+    int quantity;
     std::string title;
     std::string author;
-    int quantity;
 public:
     Item();
     Item(int id, std::string title, std::string author, int quantity);
     int getID();
+    int getQuantity();
     std::string getTitle();
     std::string getAuthor();
-    int getQuantity();
+    virtual std::string toString() = 0;
     void takeItem();
     void returnItem();
     ~Item();
