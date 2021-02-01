@@ -81,7 +81,7 @@ void GUIHandler::updateRents() {
         newRentsData.append(new QStandardItem(QString::number(currentRentptr->getID())));
         newRentsData.append(new QStandardItem(QString::fromStdString(currentRentptr->getRenter()->getName())));
         newRentsData.append(new QStandardItem(QString::fromStdString(currentRentptr->getItem()->getTitle())));
-        newRentsData.append(new QStandardItem(QString::fromStdString(std::asctime((currentRentptr->getTime())))));
+        newRentsData.append(new QStandardItem(QString::number(currentRentptr->getTime()->tm_sec)));
         rentsModel.appendRow(newRentsData);
     }
 
@@ -136,7 +136,6 @@ void GUIHandler::updateChooseButtonRents() {
     chooseBoxRent->clear();
     for (int k = 0; k < rentsSize; k++) {
         chooseBoxRent->addItem(QString::number(manager->getRent(k)->getID()));
-        std::cout << manager->getRent(k)->getID() << std::endl;
     }
 }
 
@@ -175,25 +174,32 @@ void GUIHandler::addRentButton_clicked() {
         GUIHandler::updateItems();
         GUIHandler::updateRents();
         GUIHandler::updateChooseButtonRents();
-        std::cout << "USERID " << userID << " borrowed item with ID " << itemID << std::endl;
+        std::cout<<newRenter->getName()<<" borrowed "<<newItem->getTitle()<<std::endl;
     }
     else {
-        //popup jakis ze za duzo czy cos
-        std::cout<<"Limit reached!"<<std::endl;
+        QMessageBox msgBox;
+        std::string text = newRenter->getName() + " cannot borrow " + newItem->getTitle() + "!";
+        msgBox.setText(QString::fromStdString(text));
+        msgBox.exec();
+        std::cout<<"Limit reached! "<<newRenter->getName() + " cannot borrow " + newItem->getTitle() +"!"<<std::endl;
     }
 }
 
 void GUIHandler::deleteRentButton_clicked() {
     double rentID = chooseBoxRent->currentIndex();
     if(manager->getSize()>0){
-    GUIHandler::manager->deleteRent(rentID);
-    GUIHandler::updateRentsSize(manager->getSize());
-    GUIHandler::updateRenters();
-    GUIHandler::updateItems();
-    GUIHandler::updateRents();
-    GUIHandler::updateChooseButtonRents();
+        std::cout<<manager->getRent(rentID)->getRenter()->getName()<<" returned "<<manager->getRent(rentID)->getItem()->getTitle()<<std::endl;
+        GUIHandler::manager->deleteRent(rentID);
+        GUIHandler::updateRentsSize(manager->getSize());
+        GUIHandler::updateRenters();
+        GUIHandler::updateItems();
+        GUIHandler::updateRents();
+        GUIHandler::updateChooseButtonRents();
     }
     else{
+        QMessageBox msgBox;
+        msgBox.setText("No rents left to delete!");
+        msgBox.exec();
         std::cout<<"No Rents left to delete"<<std::endl;
     }
     //std::shared
