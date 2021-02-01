@@ -14,7 +14,7 @@ private:
     std::shared_ptr<DataBase> base;
     std::shared_ptr<RentingManager> manager;
 public:
-    GUIHandler(std::shared_ptr<DataBase> base, std::shared_ptr<RentingManager> manager, QWidget *parent = nullptr);
+    GUIHandler(const std::shared_ptr<DataBase>& base, std::shared_ptr<RentingManager> manager, QWidget *parent = nullptr);
     QTableView *usersView;
     QStandardItemModel usersModel;
 

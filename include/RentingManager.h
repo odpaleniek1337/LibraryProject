@@ -12,14 +12,14 @@ typedef std::shared_ptr<Rent> bItem;
 class RentingManager {
 private:
     vector<bItem> rentedItems;
-    double idRent;
+    int idRent;
 public:
     RentingManager();
     ~RentingManager();
     void addRent(Rent newRent);
     void deleteRent(int id);
     bItem getRent(int id);
-    double getSize();
-    double getIDRent();
+    int getSize();
+    int getIDRent();
 };
 #endif //LIBRARY_RENTINGMANAGER_H
