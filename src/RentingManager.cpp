@@ -35,3 +35,7 @@ RentingManager::~RentingManager() {
 double RentingManager::getSize() {
     return RentingManager::rentedItems.size();
 }
+
+bItem RentingManager::getRent(int id) {
+    return rentedItems.at(id);
+}
