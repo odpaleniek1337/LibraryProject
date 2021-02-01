@@ -15,7 +15,6 @@ private:
     std::shared_ptr<RentingManager> manager;
 public:
     GUIHandler(std::shared_ptr<DataBase> base, std::shared_ptr<RentingManager> manager, QWidget *parent = nullptr);
-
     QTableView *usersView;
     QStandardItemModel usersModel;
 
@@ -43,11 +42,14 @@ public:
     void createChooseButtonItems();
     void createRentButtons();
 
-
     void updateRentersSize(int size);
     void updateItemsSize(int size);
     void updateRentsSize(int size);
     ~GUIHandler();
+
+public slots:
+    void addRentButton_clicked();
+
 };
 
 #endif //LIBRARY_GUIHANDLER_H

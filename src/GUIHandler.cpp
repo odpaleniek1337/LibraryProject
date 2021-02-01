@@ -17,6 +17,7 @@ GUIHandler::GUIHandler(std::shared_ptr<DataBase> base, std::shared_ptr<RentingMa
 
 void GUIHandler::updateRenters() {
     usersView = new QTableView();
+    usersModel.clear();
     usersModel.setHorizontalHeaderLabels({QApplication::translate("users", "ID"),
                                           QApplication::translate("users", "Name"),
                                           QApplication::translate("users", "CurrentItems"),
@@ -40,8 +41,9 @@ void GUIHandler::updateRenters() {
 
 void GUIHandler::updateItems() {
     itemsView = new QTableView();
+    itemsModel.clear();
     itemsModel.setHorizontalHeaderLabels({QApplication::translate("items", "ID"),
-                                          QApplication::translate("items", "Name"),
+                                          QApplication::translate("items", "Title"),
                                           QApplication::translate("items", "Author"),
                                           QApplication::translate("items", "MaxDays"),
                                           QApplication::translate("items", "Available")});
@@ -65,15 +67,20 @@ void GUIHandler::updateItems() {
 
 void GUIHandler::updateRents() {//nie widac, ze dziala bo nie ma zadnych rentow jeszcze
     rentsView = new QTableView();
-    rentsModel.setHorizontalHeaderLabels({QApplication::translate("rents", "Renter"),
-                                          QApplication::translate("rents", "Title")});
+    rentsModel.clear();
+    rentsModel.setHorizontalHeaderLabels({QApplication::translate("rents", "ID"),
+                                          QApplication::translate("rents", "Renter"),
+                                          QApplication::translate("rents", "Title"),
+                                          QApplication::translate("rents", "BorrowedTime")});
 
     QList<QStandardItem*> newRentsData;
     for (int i = 0; i < rentsSize; i++) {
         std::shared_ptr<Rent> currentRentptr = manager->getRent(i);
         newRentsData.clear();
+        newRentsData.append(new QStandardItem(QString::number(currentRentptr->getID())));
         newRentsData.append(new QStandardItem(QString::fromStdString(currentRentptr->getRenter()->getName())));
         newRentsData.append(new QStandardItem(QString::fromStdString(currentRentptr->getItem()->getTitle())));
+        newRentsData.append(new QStandardItem(QString::fromStdString(std::asctime((currentRentptr->getTime())))));
         rentsModel.appendRow(newRentsData);
     }
 
@@ -121,9 +128,10 @@ void GUIHandler::createChooseButtonItems() {
 }
 
 void GUIHandler::createRentButtons() {
-    addRentButton = new QPushButton("Add Rent");
+    addRentButton = new QPushButton(this);
+    addRentButton->setText("JD");
+    connect(addRentButton, SIGNAL(clicked()),this,SLOT(addRentButton_clicked()));
     deleteRentButton = new QPushButton("Delete Rent");
-
 }
 
 void GUIHandler::updateRentersSize(int size) {
@@ -138,7 +146,21 @@ void GUIHandler::updateRentsSize(int size) {
     rentsSize = size;
 }
 
+void GUIHandler::addRentButton_clicked() {
+    double userID = chooseBoxUser->currentIndex();
+    double itemID = chooseBoxItem->currentIndex();
+    std::shared_ptr<Renter> newRenter = GUIHandler::base->getRenter(userID);
+    std::shared_ptr<Item> newItem = GUIHandler::base->getItem(itemID);
+    Rent newRent;
+    newRent.setRent(newItem, newRenter);
+    GUIHandler::manager->addRent(newRent);
+    GUIHandler::updateRentsSize(manager->getSize());
+    GUIHandler::updateRenters();
+    GUIHandler::updateItems();
+    GUIHandler::updateRents();
+    std::cout<<"USERID "<<userID<<" borrowed item with ID "<<itemID<<std::endl;
+}
+
 GUIHandler::~GUIHandler() {
 
 }
-

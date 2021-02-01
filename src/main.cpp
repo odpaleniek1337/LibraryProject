@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
     Rent rent1;
     rent1.setRent(std::make_shared<Book>(book1), std::make_shared<Student>(student1));
     manager.addRent(rent1);*/
+    //std::cout<<std::asctime(manager.getRent(0)->getTime())<<std::endl;
     //rents cant be seen because there are no rents currently made
     QApplication app(argc, argv);
     GUIHandler myGUI(std::make_shared<DataBase>(base), std::make_shared<RentingManager>(manager));
