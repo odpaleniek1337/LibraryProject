@@ -1,5 +1,4 @@
 #include "RentingManager.h"
-#include <iostream>
 
 void RentingManager::addRent(Rent newRent) {
     newRent.setID(RentingManager::getIDRent()+1);
@@ -9,20 +8,10 @@ void RentingManager::addRent(Rent newRent) {
 }
 
 void RentingManager::deleteRent(int id) {
-    //time_t returnTime;
-    //returnTime = time(NULL);//get_time from jakas funkcja (MANAGER JEDNAK XD)
-    //time(&returnTime);
-    //returnTime += 25;
     std::shared_ptr<Rent> deletedRent = RentingManager::getRent(id);
     deletedRent->getRenter()->returnItem();
     deletedRent->getItem()->returnItem();
     RentingManager::rentedItems.erase(rentedItems.begin()+id);
-    //std::cout<<difftime(returnTime, rent.getTime())<<std::endl;
-    //std::cout<<rent.getRenter()->getName()<<" returned "<<rent.getItem()->getTitle()<<std::endl;
-    //zapisz ze dana ksiazka spowrotem zwrocona
-    //print penalty, info abour who rented etc
-    //no czy ten wektor ma jakies itemy wtedy moze popnac
-    //RentingManager::rentedItems.pop_back();
 }
 
 RentingManager::RentingManager() {

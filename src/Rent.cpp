@@ -11,15 +11,8 @@ Rent::~Rent() {
 void Rent::setRent(std::shared_ptr<Item> item, std::shared_ptr<Renter> renter) {
     Rent::item = item;
     Rent::renter = renter;
-    time_t currentTime;
-    time(&currentTime);
-    Rent::borrowedTime = localtime(&currentTime);
     renter->addItem();
     item->takeItem();
-}
-
-tm* Rent::getTime() {
-    return Rent::borrowedTime;
 }
 
 std::shared_ptr<Renter> Rent::getRenter() {

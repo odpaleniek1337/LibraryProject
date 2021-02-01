@@ -2,18 +2,15 @@
 #define LIBRARY_RENT_H
 #include "Item.h"
 #include "Renter.h"
-#include "time.h"
 #include <memory>
 
 class Rent {
 private:
 std::shared_ptr<Item> item;
 std::shared_ptr<Renter> renter;
-struct tm* borrowedTime;
 double id;
 public:
     void setRent(std::shared_ptr<Item> item, std::shared_ptr<Renter> renter);
-    tm* getTime();
     std::shared_ptr<Renter> getRenter();
     std::shared_ptr<Item> getItem();
     void setID(double id);
