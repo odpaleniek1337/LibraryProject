@@ -5,7 +5,7 @@
 class Book : public Item {
 private:
 public:
-    Book(int id,std::string title, std::string author, int quantity);
+    Book(int id,std::string title, std::string author);
     ~Book();
 };
 #endif //LIBRARY_BOOK_H
