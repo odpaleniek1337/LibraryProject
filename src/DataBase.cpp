@@ -17,10 +17,17 @@ void DataBase::readFile() {
     std::fstream finItem, finRenter;
     int check1 = 0;
     int check2 = 0;
-    finItem.open("../items.csv", std::ios::in);
+    try {
+        finItem.open("../items.csv", std::ios::in);
+        if( !finItem ) throw std::ios::failure( "Error opening file!" ) ;
+    }
+    catch(std::exception const& e)
+    {
+        check1++;
+        std::cerr << e.what() <<" for items.csv file"<<std::endl;
+    }
     std::vector<string> rowI;
     string lineI, wordI, tempI;
-    try {
         while (finItem.good()) {
             rowI.clear();
             std::getline(finItem, lineI);
@@ -47,17 +54,20 @@ void DataBase::readFile() {
                 check1++;
             }
         }
-    }
-    catch(...) {
-        std::cout<<"Something is wrong with files!"<<std::endl;
-    }
 
     finItem.close();
+    try {
+        finRenter.open("../renters.csv", std::ios::in);
+        if( !finRenter ) throw std::ios::failure( "Error opening file!" ) ;
+    }
+    catch(std::exception const& e)
+    {
+        check2++;
+        std::cerr << e.what() <<" for renters.csv file"<<std::endl;
+    }
 
-    finRenter.open("../renters.csv", std::ios::in);
     std::vector<string> rowR;
     string lineR, wordR, tempR;
-    try {
         while (finRenter.good()) {
             rowR.clear();
             std::getline(finRenter, lineR);
@@ -89,10 +99,6 @@ void DataBase::readFile() {
                 check2++;
             }
         }
-    }
-    catch(...) {
-        std::cout<<"Something is wrong with files!"<<std::endl;
-    }
 
     finRenter.close();
     if(check1==0){
