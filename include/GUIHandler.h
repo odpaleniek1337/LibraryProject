@@ -29,6 +29,7 @@ public:
     QComboBox *chooseBoxRent;
     QPushButton *addRentButton;
     QPushButton *deleteRentButton;
+    QPushButton *saveButton;
 
     QHBoxLayout *upperLayout;
     QHBoxLayout *middleLayout;
@@ -43,6 +44,7 @@ public:
     void createChooseButtonItems();
     void createChooseButtonRents();
     void createRentButtons();
+    void createSaveButton();
     void updateRentersSize(int size);
 
     void updateItemsSize(int size);
@@ -53,6 +55,7 @@ public:
 public slots:
     void addRentButton_clicked();
     void deleteRentButton_clicked();
+    void saveButton_clicked();
 
 };
 
