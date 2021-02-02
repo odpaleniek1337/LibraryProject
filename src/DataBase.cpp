@@ -152,19 +152,32 @@ void DataBase::readFile(RentingManager &manager) {
 
 void DataBase::saveFile(RentingManager &manager) {
     std::ofstream foutRents;
-    try {
-        foutRents.open("../rents.csv", std::ios::out | std::ios::trunc);
-        if( !foutRents ) throw std::ios::failure( "Error in opening file!" );
-        for(int z=0;z<manager.getSize()-1;z++){
-            foutRents<<manager.getRent(z)->getItem()->getID()-1<<","<<manager.getRent(z)->getRenter()->getID()-1<<std::endl;
+    if(manager.getSize()==0){
+        try {
+            foutRents.open("../rents.csv", std::ios::out | std::ios::trunc);
         }
-        foutRents<<manager.getRent(manager.getSize()-1)->getItem()->getID()-1<<","<<manager.getRent(manager.getSize()-1)->getRenter()->getID()-1;
+        catch(std::exception const& e)
+        {
+            std::cerr << e.what() <<" for items.csv file"<<std::endl;
+        }
+        foutRents.close();
     }
-    catch(std::exception const& e)
-    {
-        std::cerr << e.what() <<" for items.csv file"<<std::endl;
+    else {
+        try {
+            foutRents.open("../rents.csv", std::ios::out | std::ios::trunc);
+            if (!foutRents) throw std::ios::failure("Error in opening file!");
+            for (int z = 0; z < manager.getSize() - 1; z++) {
+                foutRents << manager.getRent(z)->getItem()->getID() - 1 << ","
+                          << manager.getRent(z)->getRenter()->getID() - 1 << std::endl;
+            }
+            foutRents << manager.getRent(manager.getSize() - 1)->getItem()->getID() - 1 << ","
+                      << manager.getRent(manager.getSize() - 1)->getRenter()->getID() - 1;
+        }
+        catch (std::exception const &e) {
+            std::cerr << e.what() << " for items.csv file" << std::endl;
+        }
+        foutRents.close();
     }
-    foutRents.close();
 }
 
 void DataBase::addRenter(renter newRenter) {
