@@ -13,7 +13,9 @@ GUIHandler::GUIHandler(const std::shared_ptr<DataBase>& base, std::shared_ptr<Re
     createChooseButtonUsers();
     createChooseButtonItems();
     createChooseButtonRents();
+    createSaveButton();
     createRentButtons();
+    updateChooseButtonRents();
     updateLayout();
 }
 
@@ -97,6 +99,7 @@ void GUIHandler::updateLayout() {
     middleLayout->addWidget(rentsView);
     middleLayout->addWidget(chooseBoxRent);
     middleLayout->addWidget(deleteRentButton);
+    middleLayout->addWidget(saveButton);
 
     lowerLayout = new QHBoxLayout(); //creating lowerpart of layout
     lowerLayout->addWidget(chooseBoxUser);
@@ -143,6 +146,13 @@ void GUIHandler::createRentButtons() {
     deleteRentButton = new QPushButton(this);
     deleteRentButton->setText("Delete Rent");
     connect(deleteRentButton, SIGNAL(clicked()),this,SLOT(deleteRentButton_clicked()));
+}
+
+void GUIHandler::createSaveButton(){
+    saveButton = new QPushButton(this);
+    saveButton->setText("Save to File");
+    connect(saveButton, SIGNAL(clicked()),this,SLOT(saveButton_clicked()));
+
 }
 
 void GUIHandler::updateRentersSize(int size) {
@@ -199,6 +209,10 @@ void GUIHandler::deleteRentButton_clicked() {
         msgBox.exec();
         std::cout<<"No Rents left to delete"<<std::endl;
     }
+}
+
+void GUIHandler::saveButton_clicked() {
+    GUIHandler::base->saveFile(*GUIHandler::manager);
 }
 
 GUIHandler::~GUIHandler() {

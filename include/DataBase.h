@@ -4,7 +4,7 @@
 #include "Item.h"
 #include <vector>
 #include <memory>
-
+#include "RentingManager.h"
 typedef std::shared_ptr<Renter> renter;
 typedef std::shared_ptr<Item> item;
 
@@ -15,7 +15,8 @@ private:
 public:
     DataBase();
     ~DataBase();
-    void readFile();
+    void readFile(RentingManager &manager);
+    void saveFile(RentingManager &manager);
     void addRenter(renter newRenter);
     void addItem(item newItem);
     renter getRenter(int id);
